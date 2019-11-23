@@ -27,3 +27,8 @@ endif
 obj-$(CONFIG_MTK_CHARGER)	+= charger/
 
 obj-y += misc/
+
+# Disable warnings for clang
+subdir-ccflags-y += \
+	-Wno-error=switch-unreachable \
+	-Wno-error=stringop-overflow

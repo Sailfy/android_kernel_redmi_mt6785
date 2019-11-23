@@ -13,7 +13,6 @@
 
 #$(call all-subdir-src-or-makefile)
 MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
-subdir-ccflags-y += -Werror
 
 subdir-ccflags-y += -I$(srctree)/drivers/misc/mediatek/include
 subdir-ccflags-y += -I$(srctree)/drivers/misc/mediatek/include/mt-plat/$(MTK_PLATFORM)/include
@@ -134,3 +133,14 @@ obj-$(CONFIG_MTK_PERF_TRACKER) += perf/
 obj-$(CONFIG_MTK_JPEG) += jpeg/
 obj-$(CONFIG_MTK_WATCHPOINT) += watchpoint/
 obj-$(CONFIG_MTK_USB2JTAG_SUPPORT) += usb2jtag/
+
+# Disable warnings for clang
+subdir-ccflags-y += \
+	-Wno-error=stringop-overflow \
+	-Wno-error=memset-elt-size \
+	-Wno-error=maybe-uninitialized \
+	-Wno-error=array-bounds \
+	-Wno-error=sizeof-pointer-memaccess \
+	-Wno-error=restrict \
+	-Wno-error=misleading-indentation \
+	-Wno-error=bool-operation
